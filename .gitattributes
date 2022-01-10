@@ -1,2 +1,7 @@
 # flutter application with Dart
-*.rb linguist-language=dart
+*.css linguist-detectable=false
+*.java linguist-detectable=false
+*.python linguist-detectable=true 
+*.js linguist-detectable=false
+*.html linguist-detectable=false  
+*.xml linguist-detectable=false
