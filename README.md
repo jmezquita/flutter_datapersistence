@@ -4,6 +4,12 @@
 
 
 
+## Demo
+
+![flutter_datapersistence](/capture/screen1.gif)
+
+
+
   ## Widget Personalizado
 
 ```dart
