@@ -23,30 +23,34 @@ class _SettingsViewState extends State<SettingsView> {
   double _volumentMensaje = 50.0;
   bool _modoSilencio = false;
   bool _noMolestar = false;
-  bool _vibrarModoSilencio= false;
+  bool _vibrarModoSilencio = false;
 
   ///Metodo para Obtener el valor que tenemos guarddo en el localstored
   void onGetPreferences() async {
-    Settings _settings = Settings();
+    try {
+      Settings _settings = Settings();
 
-    SharedPreferences _spref = await SharedPreferences.getInstance();
-    String jsonString = _spref.getString('settings') ?? '';
+      SharedPreferences _spref = await SharedPreferences.getInstance();
+      String jsonString = _spref.getString('settings') ?? '';
 
-    if (jsonString.isNotEmpty) {
-      Map<String, dynamic> json = jsonDecode(jsonString);
-      _settings = Settings.fromJson(json);
-      _emailController.text = _settings.email;
-      _isDarkThema = _settings.darkThema;
-      _volumentMultimedia = _settings.volumeMultimedia;
-      _nameController.text = _settings.name;
-      _volumentTono = _settings.volumeTono;
-      _volumentAlarma = _settings.volumeAlarma;
-      _volumentLlamada = _settings.volumeLlamada;
-      _modoSilencio = _settings.modoSilencio;
-      _noMolestar = _settings.noMolestar;
-      _volumentMensaje = _settings.volumentMensaje;
-      _vibrarModoSilencio = _settings.vibrarModoSilencio;
-      onSetState();
+      if (jsonString.isNotEmpty) {
+        Map<String, dynamic> json = jsonDecode(jsonString);
+        _settings = Settings.fromJson(json);
+        _emailController.text = _settings.email;
+        _isDarkThema = _settings.darkThema;
+        _volumentMultimedia = _settings.volumeMultimedia;
+        _nameController.text = _settings.name;
+        _volumentTono = _settings.volumeTono;
+        _volumentAlarma = _settings.volumeAlarma;
+        _volumentLlamada = _settings.volumeLlamada;
+        _modoSilencio = _settings.modoSilencio;
+        _noMolestar = _settings.noMolestar;
+        _volumentMensaje = _settings.volumentMensaje;
+        _vibrarModoSilencio = _settings.vibrarModoSilencio;
+        onSetState();
+      }
+    } catch (e) {
+      throw Exception("Not implementation error");
     }
   }
 
@@ -178,7 +182,7 @@ class _SettingsViewState extends State<SettingsView> {
                 ),
                 SliderWidget(
                   title: "Mensajes",
-                  icon: Icons.message   ,
+                  icon: Icons.message,
                   value: _volumentMensaje,
                   onChanged: (value) {
                     setState(() {
@@ -228,35 +232,33 @@ class _SettingsViewState extends State<SettingsView> {
 
   ///Metodo para guardar el valor en nuestro localstored
   Future onSavePreferences() async {
-    Settings _stetting = Settings(
-        email: _emailController.text,
-        name: _nameController.text,
-        darkThema: _isDarkThema,
-        volumeMultimedia: _volumentMultimedia,
-        volumeTono: _volumentTono,
-        volumeAlarma: _volumentAlarma,
-        volumeLlamada: _volumentLlamada,
-        modoSilencio:_modoSilencio ,
-       noMolestar:_noMolestar,
-       volumentMensaje:_volumentMensaje,
-       vibrarModoSilencio:_vibrarModoSilencio
+    try {
+      Settings _stetting = Settings(
+          email: _emailController.text,
+          name: _nameController.text,
+          darkThema: _isDarkThema,
+          volumeMultimedia: _volumentMultimedia,
+          volumeTono: _volumentTono,
+          volumeAlarma: _volumentAlarma,
+          volumeLlamada: _volumentLlamada,
+          modoSilencio: _modoSilencio,
+          noMolestar: _noMolestar,
+          volumentMensaje: _volumentMensaje,
+          vibrarModoSilencio: _vibrarModoSilencio);
+
+      SharedPreferences _sPref = await SharedPreferences.getInstance();
+      String user = jsonEncode(Settings.fromJson(_stetting.toJson()));
+      _sPref.setString('settings', user);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Información guardada"),
+          duration: Duration(milliseconds: 1500),
+          backgroundColor: Color(0xFF4268D3),
+        ),
       );
-
-    SharedPreferences _sPref = await SharedPreferences.getInstance();
-    String user = jsonEncode(Settings.fromJson(_stetting.toJson()));
-    _sPref.setString('settings', user);
-
-
-
- ScaffoldMessenger.of(context).showSnackBar(
-     const SnackBar(
-        content:  Text("Información guardada"),
-          duration:  Duration(milliseconds: 1500),
-          backgroundColor:  Color(0xFF4268D3),
-        
-      ),
-    );
-
-
+    } catch (error) {
+      throw Exception("Not implementation error");
+    }
   }
 }
