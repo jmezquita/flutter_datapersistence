@@ -1,6 +1,6 @@
 # flutter_datapersistence
 
-en este proyecto encontraras la forma mas facil del uso de persistencia de dato local,
+En este proyecto encontraras la forma mas facil del uso de persistencia de dato local,
 
 ## Getting Started
 
