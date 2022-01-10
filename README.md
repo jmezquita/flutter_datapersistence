@@ -1,6 +1,6 @@
 # flutter datapersistence
 
- Este proyecto muestra la forma más fácil de hacer uso de la persistencia de dato local usando **SharedPreferences**. Aunque el proyecto en principio es solo mostrar el uso SharedPreferences cabe mencionar que esta bien estructurado y que maneja un modelo de dato **Json** para intectaractual con los datos. A todo esto, muestra como crear un **custom Widget** con parámetros y eventos mostrando así la reutilización de código. Espero que les gustes
+ Este proyecto muestra la forma más fácil de hacer uso de la persistencia de dato local usando **SharedPreferences**. Aunque el proyecto en principio es solo mostrar el uso SharedPreferences cabe mencionar que esta bien estructurado y que maneja un modelo de dato **Json** para intectaractual con los datos. A todo esto, muestra como crear un **custom Widget** con parámetros y eventos mostrando así la reutilización de código. Espero que les gustes..:smile:
 
 
 
@@ -157,5 +157,10 @@ import 'package:shared_preferences/shared_preferences.dart';
     }
   }
   ```
+  
+  ## Nota
+  Las execciones no estan probadas, no recomiendo su uso sin probar. de hechon esta no es la forma de implementar execciones en flutter, lo mas sano es crear un Widget  personalizado, el cual al pasar el error este se encargue de mostrarlo y de limpiar la execcion.
+  
+  
   
   
