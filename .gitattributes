@@ -5,5 +5,5 @@
 *.js linguist-detectable=false
 *.html linguist-detectable=false  
 *.xml linguist-detectable=false
-*.objective-C linguist-detectable=false
-*.c++ linguist-detectable=false
+*.Objective-C linguist-detectable=false
+*.C++ linguist-detectable=false
