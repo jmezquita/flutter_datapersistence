@@ -1,6 +1,6 @@
 # flutter datapersistence
 
- Este proyecto muestra la forma más fácil de hacer uso de la persistencia de dato local usando **SharedPreferences**. Aunque el proyecto en principio es solo mostrar el uso SharedPreferences cabe mencionar que esta bien estructurado y que maneja un modelo de dato **Json** para intectaractual con el local store. A todo esto, muestra como crear un **custom Widget** con parámetros y eventos mostrando así la reutilización de código. Espero que les gustes
+ Este proyecto muestra la forma más fácil de hacer uso de la persistencia de dato local usando **SharedPreferences**. Aunque el proyecto en principio es solo mostrar el uso SharedPreferences cabe mencionar que esta bien estructurado y que maneja un modelo de dato **Json** para intectaractual con los datos. A todo esto, muestra como crear un **custom Widget** con parámetros y eventos mostrando así la reutilización de código. Espero que les gustes
 
 
 
@@ -62,44 +62,70 @@ class SliderWidget extends StatelessWidget {
 }
 ```
 
+  ## Llamada del Widget Personalizado
 
-  ## Método obtener los datos
+```dart
+     SliderWidget(
+                  title: "Multimedia",
+                  icon: Icons.music_note,
+                  value: _volumentMultimedia,
+                  onChanged: (value) {
+                    setState(() {
+                      _volumentMultimedia = value;
+                    });
+                  },
+                ),
+
+```
+
+
+## Uso del shared_preferences para guardar y obtener los valores
+
+```dart
+import 'package:shared_preferences/shared_preferences.dart';
+```
+
+
+  ### Método para obtener los datos
 
 ```dart
   
-  ///Método para obtener el valor que tenemos guardado en el localStored
-  void onGetPreferences() async {
-    Settings _settings = Settings();
+  ///Método para obtener el valor que tenemos guardado
+ void onGetPreferences() async {
+    try {
+      Settings _settings = Settings();
 
-    SharedPreferences _spref = await SharedPreferences.getInstance();
-    String jsonString = _spref.getString('settings') ?? '';
+      SharedPreferences _spref = await SharedPreferences.getInstance();
+      String jsonString = _spref.getString('settings') ?? '';
 
-    if (jsonString.isNotEmpty) {
-      Map<String, dynamic> json = jsonDecode(jsonString);
-      _settings = Settings.fromJson(json);
-      _emailController.text = _settings.email;
-      _isDarkThema = _settings.darkThema;
-      _volumentMultimedia = _settings.volumeMultimedia;
-      _nameController.text = _settings.name;
-      _volumentTono = _settings.volumeTono;
-      _volumentAlarma = _settings.volumeAlarma;
-      _volumentLlamada = _settings.volumeLlamada;
-      _modoSilencio = _settings.modoSilencio;
-      _noMolestar = _settings.noMolestar;
-      _volumentMensaje = _settings.volumentMensaje;
-      _vibrarModoSilencio = _settings.vibrarModoSilencio;
-      onSetState();
+      if (jsonString.isNotEmpty) {
+        Map<String, dynamic> json = jsonDecode(jsonString);
+        _settings = Settings.fromJson(json);
+        _emailController.text = _settings.email;
+        _isDarkThema = _settings.darkThema;
+        _volumentMultimedia = _settings.volumeMultimedia;
+        _nameController.text = _settings.name;
+        _volumentTono = _settings.volumeTono;
+        _volumentAlarma = _settings.volumeAlarma;
+        _volumentLlamada = _settings.volumeLlamada;
+        _modoSilencio = _settings.modoSilencio;
+        _noMolestar = _settings.noMolestar;
+        _volumentMensaje = _settings.volumentMensaje;
+        _vibrarModoSilencio = _settings.vibrarModoSilencio;
+        onSetState();
+      }
+    } catch (e) {
+      throw Exception("Not implementation error");
+      print(e);
     }
   }
  ```
 
-## Método para guardar
+### Método para guardar
 
 ```dart
 
-import 'package:shared_preferences/shared_preferences.dart';
-
-  ///Método para guardar el valor en nuestro localstored
+  ///Método para guardar el valor 
   Future onSavePreferences() async {
     try {
       Settings _stetting = Settings(
@@ -127,7 +153,7 @@ import 'package:shared_preferences/shared_preferences.dart';
         ),
       );
     } catch (error) {
-      throw Exception("Not implementation error");
+      throw Exception("Not implement error");
     }
   }
   ```
