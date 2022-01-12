@@ -3,6 +3,7 @@
  Este proyecto muestra la forma más fácil de hacer uso de la persistencia de dato local usando **SharedPreferences**. Aunque el proyecto en principio es solo mostrar el uso SharedPreferences cabe mencionar que esta bien estructurado y que maneja un modelo de dato **Json** para intectaractual con los datos. A todo esto, muestra como crear un **custom Widget** con parámetros y eventos mostrando así la reutilización de código. Espero que les gustes..:smile:
 
 
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/jmezquita)
 
 ## Demo
 
